@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.StepMapper" >
+  <resultMap id="BaseResultMap" type="dao.Step" >
+    <id column="stepId" property="stepid" jdbcType="INTEGER" />
+    <result column="recipeId" property="recipeid" jdbcType="INTEGER" />
+    <result column="stepOrder" property="steporder" jdbcType="SMALLINT" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="images" property="images" jdbcType="VARCHAR" />
+    <result column="ingredient" property="ingredient" jdbcType="VARCHAR" />
+    <result column="audio" property="audio" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stepId, recipeId, stepOrder, time, description, images, ingredient, audio
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="dao.StepExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from step
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from step
+    where stepId = #{stepid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from step
+    where stepId = #{stepid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="dao.StepExample" >
+    delete from step
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="dao.Step" >
+    insert into step ( recipeId, stepOrder, 
+      time, description, images, 
+      ingredient, audio)
+    values ( #{recipeid,jdbcType=INTEGER}, #{steporder,jdbcType=SMALLINT}, 
+      #{time,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 
+      #{ingredient,jdbcType=VARCHAR}, #{audio,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="dao.Step" >
+    insert into step
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stepid != null" >
+        stepId,
+      </if>
+      <if test="recipeid != null" >
+        recipeId,
+      </if>
+      <if test="steporder != null" >
+        stepOrder,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="images != null" >
+        images,
+      </if>
+      <if test="ingredient != null" >
+        ingredient,
+      </if>
+      <if test="audio != null" >
+        audio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stepid != null" >
+        #{stepid,jdbcType=INTEGER},
+      </if>
+      <if test="recipeid != null" >
+        #{recipeid,jdbcType=INTEGER},
+      </if>
+      <if test="steporder != null" >
+        #{steporder,jdbcType=SMALLINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null" >
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredient != null" >
+        #{ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="audio != null" >
+        #{audio,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="dao.StepExample" resultType="java.lang.Integer" >
+    select count(*) from step
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update step
+    <set >
+      <if test="record.stepid != null" >
+        stepId = #{record.stepid,jdbcType=INTEGER},
+      </if>
+      <if test="record.recipeid != null" >
+        recipeId = #{record.recipeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.steporder != null" >
+        stepOrder = #{record.steporder,jdbcType=SMALLINT},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.images != null" >
+        images = #{record.images,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ingredient != null" >
+        ingredient = #{record.ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audio != null" >
+        audio = #{record.audio,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update step
+    set stepId = #{record.stepid,jdbcType=INTEGER},
+      recipeId = #{record.recipeid,jdbcType=INTEGER},
+      stepOrder = #{record.steporder,jdbcType=SMALLINT},
+      time = #{record.time,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      images = #{record.images,jdbcType=VARCHAR},
+      ingredient = #{record.ingredient,jdbcType=VARCHAR},
+      audio = #{record.audio,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="dao.Step" >
+    update step
+    <set >
+      <if test="recipeid != null" >
+        recipeId = #{recipeid,jdbcType=INTEGER},
+      </if>
+      <if test="steporder != null" >
+        stepOrder = #{steporder,jdbcType=SMALLINT},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null" >
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredient != null" >
+        ingredient = #{ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="audio != null" >
+        audio = #{audio,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stepId = #{stepid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dao.Step" >
+    update step
+    set recipeId = #{recipeid,jdbcType=INTEGER},
+      stepOrder = #{steporder,jdbcType=SMALLINT},
+      time = #{time,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      ingredient = #{ingredient,jdbcType=VARCHAR},
+      audio = #{audio,jdbcType=VARCHAR}
+    where stepId = #{stepid,jdbcType=INTEGER}
+  </update>
+</mapper>

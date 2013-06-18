@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- changes from the defaults -->
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+
+	<typeAliases>
+		<typeAlias alias="recipe" type="dao.Recipe" />
+		<typeAlias alias="step" type="dao.Step" />		
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://192.168.1.201:3306/caipu?useUnicode=true&amp;characterEncoding=utf8" />
+				<property name="username" value="dev" />
+				<property name="password" value="dev" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="dao/RecipeMapper.xml" />
+		<mapper resource="dao/StepMapper.xml" />
+		<mapper resource="dao/RecipeallinoneMapper.xml" />		
+	</mappers>
+	
+
+</configuration>  

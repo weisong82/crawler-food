@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.RecipeallinoneMapper" >
+  <resultMap id="BaseResultMap" type="dao.Recipeallinone" >
+    <id column="recipeId" property="recipeid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="mainimages" property="mainimages" jdbcType="VARCHAR" />
+    <result column="recruit" property="recruit" jdbcType="VARCHAR" />
+    <result column="taste" property="taste" jdbcType="VARCHAR" />
+    <result column="cookingTime" property="cookingtime" jdbcType="INTEGER" />
+    <result column="mainIngredient" property="mainingredient" jdbcType="VARCHAR" />
+    <result column="ingredient" property="ingredient" jdbcType="VARCHAR" />
+    <result column="funcational" property="funcational" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="stepimages" property="stepimages" jdbcType="VARCHAR" />
+    <result column="stepingredient" property="stepingredient" jdbcType="VARCHAR" />
+    <result column="audio" property="audio" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    recipeId, name, mainimages, recruit, taste, cookingTime, mainIngredient, ingredient, 
+    funcational, comment, time, description, stepimages, stepingredient, audio
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="dao.RecipeallinoneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from recipeallinone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from recipeallinone
+    where recipeId = #{recipeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from recipeallinone
+    where recipeId = #{recipeid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="dao.RecipeallinoneExample" >
+    delete from recipeallinone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="dao.Recipeallinone" >
+    insert into recipeallinone (recipeId, name, mainimages, 
+      recruit, taste, cookingTime, 
+      mainIngredient, ingredient, funcational, 
+      comment, time, description, 
+      stepimages, stepingredient, audio
+      )
+    values (#{recipeid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{mainimages,jdbcType=VARCHAR}, 
+      #{recruit,jdbcType=VARCHAR}, #{taste,jdbcType=VARCHAR}, #{cookingtime,jdbcType=INTEGER}, 
+      #{mainingredient,jdbcType=VARCHAR}, #{ingredient,jdbcType=VARCHAR}, #{funcational,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{stepimages,jdbcType=VARCHAR}, #{stepingredient,jdbcType=VARCHAR}, #{audio,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="dao.Recipeallinone" >
+    insert into recipeallinone
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recipeid != null" >
+        recipeId,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="mainimages != null" >
+        mainimages,
+      </if>
+      <if test="recruit != null" >
+        recruit,
+      </if>
+      <if test="taste != null" >
+        taste,
+      </if>
+      <if test="cookingtime != null" >
+        cookingTime,
+      </if>
+      <if test="mainingredient != null" >
+        mainIngredient,
+      </if>
+      <if test="ingredient != null" >
+        ingredient,
+      </if>
+      <if test="funcational != null" >
+        funcational,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="stepimages != null" >
+        stepimages,
+      </if>
+      <if test="stepingredient != null" >
+        stepingredient,
+      </if>
+      <if test="audio != null" >
+        audio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recipeid != null" >
+        #{recipeid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mainimages != null" >
+        #{mainimages,jdbcType=VARCHAR},
+      </if>
+      <if test="recruit != null" >
+        #{recruit,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null" >
+        #{taste,jdbcType=VARCHAR},
+      </if>
+      <if test="cookingtime != null" >
+        #{cookingtime,jdbcType=INTEGER},
+      </if>
+      <if test="mainingredient != null" >
+        #{mainingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredient != null" >
+        #{ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="funcational != null" >
+        #{funcational,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="stepimages != null" >
+        #{stepimages,jdbcType=VARCHAR},
+      </if>
+      <if test="stepingredient != null" >
+        #{stepingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="audio != null" >
+        #{audio,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="dao.RecipeallinoneExample" resultType="java.lang.Integer" >
+    select count(*) from recipeallinone
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update recipeallinone
+    <set >
+      <if test="record.recipeid != null" >
+        recipeId = #{record.recipeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainimages != null" >
+        mainimages = #{record.mainimages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recruit != null" >
+        recruit = #{record.recruit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taste != null" >
+        taste = #{record.taste,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cookingtime != null" >
+        cookingTime = #{record.cookingtime,jdbcType=INTEGER},
+      </if>
+      <if test="record.mainingredient != null" >
+        mainIngredient = #{record.mainingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ingredient != null" >
+        ingredient = #{record.ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.funcational != null" >
+        funcational = #{record.funcational,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepimages != null" >
+        stepimages = #{record.stepimages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stepingredient != null" >
+        stepingredient = #{record.stepingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audio != null" >
+        audio = #{record.audio,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update recipeallinone
+    set recipeId = #{record.recipeid,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      mainimages = #{record.mainimages,jdbcType=VARCHAR},
+      recruit = #{record.recruit,jdbcType=VARCHAR},
+      taste = #{record.taste,jdbcType=VARCHAR},
+      cookingTime = #{record.cookingtime,jdbcType=INTEGER},
+      mainIngredient = #{record.mainingredient,jdbcType=VARCHAR},
+      ingredient = #{record.ingredient,jdbcType=VARCHAR},
+      funcational = #{record.funcational,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      stepimages = #{record.stepimages,jdbcType=VARCHAR},
+      stepingredient = #{record.stepingredient,jdbcType=VARCHAR},
+      audio = #{record.audio,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="dao.Recipeallinone" >
+    update recipeallinone
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="mainimages != null" >
+        mainimages = #{mainimages,jdbcType=VARCHAR},
+      </if>
+      <if test="recruit != null" >
+        recruit = #{recruit,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null" >
+        taste = #{taste,jdbcType=VARCHAR},
+      </if>
+      <if test="cookingtime != null" >
+        cookingTime = #{cookingtime,jdbcType=INTEGER},
+      </if>
+      <if test="mainingredient != null" >
+        mainIngredient = #{mainingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="ingredient != null" >
+        ingredient = #{ingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="funcational != null" >
+        funcational = #{funcational,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="stepimages != null" >
+        stepimages = #{stepimages,jdbcType=VARCHAR},
+      </if>
+      <if test="stepingredient != null" >
+        stepingredient = #{stepingredient,jdbcType=VARCHAR},
+      </if>
+      <if test="audio != null" >
+        audio = #{audio,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where recipeId = #{recipeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="dao.Recipeallinone" >
+    update recipeallinone
+    set name = #{name,jdbcType=VARCHAR},
+      mainimages = #{mainimages,jdbcType=VARCHAR},
+      recruit = #{recruit,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=VARCHAR},
+      cookingTime = #{cookingtime,jdbcType=INTEGER},
+      mainIngredient = #{mainingredient,jdbcType=VARCHAR},
+      ingredient = #{ingredient,jdbcType=VARCHAR},
+      funcational = #{funcational,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      time = #{time,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      stepimages = #{stepimages,jdbcType=VARCHAR},
+      stepingredient = #{stepingredient,jdbcType=VARCHAR},
+      audio = #{audio,jdbcType=VARCHAR}
+    where recipeId = #{recipeid,jdbcType=INTEGER}
+  </update>
+</mapper>
