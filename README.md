@@ -1,4 +1,16 @@
-crawler-food
+
+简单的页面爬虫 页面解析
+ 
+ 1.java6， maven3 , httpclient4.2， mybatis,mysql  vidageekcrawler jsoup
+ 2.使用2个开源框架，特别要介绍的是jsoup（用过jquery把，jsoup的select完全吸取了这个风格的精髓） net.vidageekcrawler1.0 <!-- jsoup HTML parser library @ http://jsoup.org/ --> org.jsoupjsoup1.7.2
+ 
+
+细节
+建库sql在readme.txt中， 如果只是爬取可以去掉dao层。
+写了2个站点的解析，chinacaipu，meishijie， 其中meshijie的页面明显规范很多，爬取到的内容格式非常好！
+C站图片有referce验证 ，M站有访问频率限制，当然很容易绕过去。     
+
+ 说明
 ============
 
 美食街爬虫demo   sql.
